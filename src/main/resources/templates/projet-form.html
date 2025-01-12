@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire d'ajout/modification de projet</title>
+  <!-- Lien vers le CSS de Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h4 mb-0">Formulaire d'ajout/modification de projet</h1>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/projet/admin/save}" th:object="${projet}" method="post">
+
+        <!-- Nom du projet -->
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom du projet</label>
+          <input type="text" id="nom" class="form-control" th:field="*{nom}" placeholder="Entrez le nom du projet" required>
+        </div>
+
+        <!-- Description du projet -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" class="form-control" th:field="*{description}" rows="4" placeholder="Entrez une description du projet" required></textarea>
+        </div>
+
+        <!-- Boutons de soumission -->
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+          <a href="/projet/all" class="btn btn-secondary ms-2">Annuler</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Lien vers le JS de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

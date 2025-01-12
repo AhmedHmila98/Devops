@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire Tâche</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h4 mb-0" th:text="${tache.id == null ? 'Ajouter une nouvelle tâche' : 'Modifier la tâche'}"></h1>
+    </div>
+    <div class="card-body">
+      <form th:action="@{/tachees/admin/save}" th:object="${tache}" method="post">
+        <!-- Champ Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label">Description:</label>
+          <input type="text" id="description" class="form-control" th:field="*{description}" required />
+        </div>
+
+        <!-- Champ Statut -->
+        <div class="mb-3">
+          <label for="statut" class="form-label">Statut:</label>
+          <select id="statut" class="form-select" th:field="*{statut}" required>
+            <option value=""  th:if="${tache.statut == null}" disabled selected>Choisir un statut</option>
+            <option value="En cours" th:text="'En cours'">En cours</option>
+            <option value="Résolue" th:text="'Résolue'">Résolue</option>
+          </select>
+        </div>
+
+        <!-- Champ Date Limite -->
+        <div class="mb-3">
+          <label for="dateLimite" class="form-label">Date Limite:</label>
+          <input type="date" id="dateLimite" class="form-control" th:field="*{dateLimite}" required />
+        </div>
+
+        <!-- Sélecteur Projet -->
+        <div class="mb-3">
+          <label for="projets" class="form-label">Projet:</label>
+          <select id="projets" class="form-select" th:field="*{projets.id}" required>
+            <option value=""  th:if="${tache.projets.nom == null}" disabled selected>Choisir un projet</option>
+            <option th:each="projet : ${projets}" th:value="${projet.id}" th:text="${projet.nom}"
+                    th:selected="${projet.id == tache.projets.id}"></option>
+          </select>
+        </div>
+
+
+        <!-- Sélecteur Employé -->
+        <div class="mb-3">
+          <label for="employe" class="form-label">Employé:</label>
+          <select id="employe" class="form-select" th:field="*{employe.id}" required>
+            <option value=""  th:if="${tache.employe == null}" disabled selected>Choisir un employé</option>
+            <option th:each="employe : ${employes}" th:value="${employe.id}" th:text="${employe.nom}"
+                    th:selected="${employe.id == tache.employe.id}"></option>
+          </select>
+        </div>
+
+        <div class="text-end">
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer text-end">
+      <a href="/tachees/all" class="btn btn-secondary">Retour à la liste des tâches</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

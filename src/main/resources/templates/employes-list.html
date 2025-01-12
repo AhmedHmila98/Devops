@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des Employés</title>
+    <!-- Lien vers le CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Liste des Employés</h1>
+
+    <a href="/" class="btn btn-primary mt-3">Retour à l'Accueil</a>
+
+
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Boucle sur les employés -->
+        <tr th:each="employe : ${employes}">
+            <td th:text="${employe.id}"></td>
+            <td th:text="${employe.nom}"></td>
+            <td th:text="${employe.email}"></td>
+            <td th:text="${employe.telephone}"></td>
+            <td>
+
+                <a th:href="@{'/employees/' + ${employe.id}}" class="btn btn-info btn-sm">Détails</a>
+                <a th:href="@{'/employees/admin/edit/' + ${employe.id}}" class="btn btn-warning btn-sm">Modifier</a>
+                <a th:href="@{'/employees/admin/delete/' + ${employe.id}}" class="btn btn-danger btn-sm">Supprimer</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <a href="/employees/admin/form" class="btn btn-success">Ajouter un Employé</a>
+
+
+</div>
+
+<!-- Lien vers le JS de Bootstrap (pour le bon fonctionnement des éléments interactifs) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
