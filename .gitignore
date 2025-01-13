@@ -20,7 +20,8 @@ release.properties
 *.properties
 *.yml
 *.yaml
-.env
+*.env
+!docker-compose.yml
 
 # IntelliJ IDEA
 .idea/
@@ -34,4 +35,3 @@ release.properties
 # OS-specific files
 .DS_Store
 Thumbs.db
-
