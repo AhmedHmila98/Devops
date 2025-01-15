@@ -19,7 +19,7 @@ release.properties
 # Spring Boot
 *.properties
 *.yml
-*.yaml
+
 *.env
 !docker-compose.yml
 
